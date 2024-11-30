@@ -177,7 +177,8 @@ else
 
         sort lv.csv -k6 -t';' -h | tail -n+$countIndiv | sort -k3 -r -t';' -h >> lvIndiv.csv
 
-    else
+    elif [ "$3" = "comp" ]
+    then
         cat lvPost.csv > lvComp.csv
         sort lv.csv -k5 -t';' -h | cut -d';' -f5 > lvCompColumn.csv
 
@@ -191,6 +192,9 @@ else
             countComp=$((countComp+1))
         done
         sort lv.csv -k5 -t';' -h | tail -n+$countComp | sort -k3 -r -t';' -h >> lvComp.csv
+    
+    else
+        cat lv.csv > lvAll.csv
     fi
 fi
 
@@ -204,8 +208,11 @@ else
     if [ "$3" = "comp" ]
     then
         file="lvComp.csv"
-    else
+    elif [ "$3" = "indiv" ]
+    then
         file="lvIndiv.csv"
+    else
+        file="lvAll.csv"
     fi
 fi
 
