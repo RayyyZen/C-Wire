@@ -67,7 +67,7 @@ else
     col=4
 fi
 
-tail -n+2 $1 | sort -k"$col" -t';' -h > tmp/stations.csv 
+tail -n+2 $1 | sort -k"$col" -t';' -n > tmp/stations.csv 
 #Sorts the file containing all the datas after removing the first line
 
 cd tmp
@@ -90,16 +90,16 @@ col=$((col-1))
 
 if [ $col -eq 1 ]
 then
-    tail -n+$stationsCounter stations.csv | sort -k"$col" -t';' -h > "$2.csv"
+    tail -n+$stationsCounter stations.csv | sort -k"$col" -t';' -n > "$2.csv"
 else
-    tail -n+$stationsCounter stations.csv | sort -k"$col" -r -t';' -h > "$2.csv"
+    tail -n+$stationsCounter stations.csv | sort -k"$col" -r -t';' -n > "$2.csv"
 fi
 #Remove the lines where there is not the station to process and sort the file
 
 count=0
 if [ "$2" = "hvb" ]
 then
-    sort -k3 -t';' -h hvb.csv > hvbCompTmp.csv
+    sort -k3 -t';' -n hvb.csv > hvbCompTmp.csv
     cut -d';' -f3 hvbCompTmp.csv > hvbColumn.csv
     for i in `cat hvbColumn.csv`
     do
@@ -109,11 +109,11 @@ then
         fi
         count=$((count+1))
     done
-    head -n$count hvbCompTmp.csv |  sort -k1 -t';' -h > hvbComp.csv
+    head -n$count hvbCompTmp.csv |  sort -k1 -t';' -n > hvbComp.csv
 
 elif [ "$2" = "hva" ]
 then
-    sort -k4 -t';' -h hva.csv > hvaCompTmp.csv 
+    sort -k4 -t';' -n hva.csv > hvaCompTmp.csv 
     cut -d';' -f4 hvaCompTmp.csv > hvaColumn.csv
     for i in `cat hvaColumn.csv`
     do
@@ -123,7 +123,7 @@ then
         fi
         count=$((count+1))
     done
-    head -n$count hvaCompTmp.csv |  sort -k2 -r -t';' -h > hvaComp.csv
+    head -n$count hvaCompTmp.csv |  sort -k2 -r -t';' -n > hvaComp.csv
 
 else
     cut -d';' -f6 lv.csv > indiv.csv
@@ -163,7 +163,7 @@ else
     if [ "$3" = "indiv" ]
     then
         cat lvPost.csv > lvIndiv.csv
-        sort lv.csv -k6 -t';' -h | cut -d';' -f6 > lvIndivColumn.csv
+        sort lv.csv -k6 -t';' -n | cut -d';' -f6 > lvIndivColumn.csv
 
         countIndiv=1
         for i in `cat lvIndivColumn.csv`
@@ -175,12 +175,12 @@ else
             countIndiv=$((countIndiv+1))
         done
 
-        sort lv.csv -k6 -t';' -h | tail -n+$countIndiv | sort -k3 -r -t';' -h >> lvIndiv.csv
+        sort lv.csv -k6 -t';' -n | tail -n+$countIndiv | sort -k3 -r -t';' -n >> lvIndiv.csv
 
     elif [ "$3" = "comp" ]
     then
         cat lvPost.csv > lvComp.csv
-        sort lv.csv -k5 -t';' -h | cut -d';' -f5 > lvCompColumn.csv
+        sort lv.csv -k5 -t';' -n | cut -d';' -f5 > lvCompColumn.csv
 
         countComp=1
         for i in `cat lvCompColumn.csv`
@@ -191,7 +191,7 @@ else
             fi
             countComp=$((countComp+1))
         done
-        sort lv.csv -k5 -t';' -h | tail -n+$countComp | sort -k3 -r -t';' -h >> lvComp.csv
+        sort lv.csv -k5 -t';' -n | tail -n+$countComp | sort -k3 -r -t';' -n >> lvComp.csv
     
     else
         cat lv.csv > lvAll.csv
@@ -223,5 +223,8 @@ cd codeC
 make
 
 ./CWire "../tmp/$file" "$2" "$3"
+
+sort "$2_$3.csv" -k2 -t':' -n > sortTmp.csv
+mv sortTmp.csv "$2_$3.csv"
 
 cd ..
