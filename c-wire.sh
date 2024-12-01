@@ -67,6 +67,8 @@ else
     col=4
 fi
 
+cat $1 > input/inputStations.csv
+
 tail -n+2 $1 | sort -k"$col" -t';' -n > tmp/stations.csv 
 #Sorts the file containing all the datas after removing the first line
 
@@ -216,15 +218,21 @@ else
     fi
 fi
 
+lines=$(cat "$file")
+
 cd ..
 
 cd codeC
 
 make
 
-./CWire "../tmp/$file" "$2" "$3"
+./CWire "$2" "$3" $lines
+
+#./CWire "../tmp/$file" "$2" "$3"
+
+cd ..
+
+cd tests
 
 sort "$2_$3.csv" -k2 -t':' -n > sortTmp.csv
 mv sortTmp.csv "$2_$3.csv"
-
-cd ..
