@@ -1,6 +1,6 @@
 #include "file.h"
 
-void saveLineInfos(char *line, int infos[INFOS]){
+void saveLineInfos(char *line, long int infos[INFOS]){
     char string[50];
     int indexInfos=0,indexLine=0,indexString=0;
 
@@ -36,7 +36,7 @@ void saveLineInfos(char *line, int infos[INFOS]){
     }
 }
 
-pTree processStation(pTree root, char *typeStation, char *typeConsumer, int infos[INFOS]){
+pTree processStation(pTree root, char *typeStation, char *typeConsumer, long int infos[INFOS]){
     Station station={0};
     int h=0;
 

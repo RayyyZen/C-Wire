@@ -14,8 +14,8 @@
 #define CAPACITY 6
 #define LOAD 7
 
-void saveLineInfos(char *line, int infos[INFOS]);
-pTree processStation(pTree root, char *typeStation, char *typeConsumer, int infos[INFOS]);
+void saveLineInfos(char *line, long int infos[INFOS]);
+pTree processStation(pTree root, char *typeStation, char *typeConsumer, long int infos[INFOS]);
 void fillOutputFile(FILE *file, pTree root);
 
 #endif

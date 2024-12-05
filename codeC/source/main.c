@@ -1,10 +1,10 @@
 #include "insertionAVL.h"
+#include "deleteTree.h"
 #include "file.h"
 
-/*
 int main(int argc, char** argv){
     pTree root=NULL;
-    int infos[INFOS]={0};
+    long int infos[INFOS]={0};
     char line[50];
     char fileName[10];
     FILE *file=fopen(argv[1],"r");
@@ -38,39 +38,7 @@ int main(int argc, char** argv){
     
     fclose(output);
 
-    return 0;
-}
-*/
-
-int main(int argc, char** argv){
-    pTree root=NULL;
-    int infos[INFOS]={0};
-    char fileName[20];
-    
-    for(int i=3;i<argc;i++){
-        saveLineInfos(argv[i],infos);
-        root=processStation(root,argv[1],argv[2],infos);
-    }
-    
-
-
-    strcpy(fileName,"../tests/");
-    strcat(fileName,argv[1]);
-    strcat(fileName,"_");
-    strcat(fileName,argv[2]);
-    strcat(fileName,".csv");
-
-    FILE *output=fopen(fileName,"w");
-
-    if(output==NULL){
-        exit(21);
-    }
-    
-    fprintf(output,"Station %s:Capacity in kWh:Consumption in kWh (%s)\n",argv[1],argv[2]);
-
-    fillOutputFile(output,root);
-    
-    fclose(output);
+    deleteAllTree(&root);
 
     return 0;
 }

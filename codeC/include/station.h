@@ -5,8 +5,8 @@
 
 typedef struct{
     int identifier;
-    int capacity;
-    int consumption;
+    long int capacity;
+    long int consumption;
 }Station;
 
 typedef struct tree{
