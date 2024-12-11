@@ -3,7 +3,7 @@
 pTree createTree(Station newStation){
     pTree node=malloc(sizeof(Tree));
     if(node==NULL){
-        printf("Erreur d'allocation dynamique !\n");
+        printf("Dynamic allocation error !\n");
         exit(1);
     }
     node->station=newStation;

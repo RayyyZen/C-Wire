@@ -5,6 +5,7 @@ void saveLineInfos(char *line, long int infos[INFOS]){
     int indexInfos=0,indexLine=0,indexString=0;
 
     if(line==NULL){
+        printf("Error : process of an empty line !\n");
         exit(30);
     }
 
@@ -40,7 +41,8 @@ pTree processStation(pTree root, char *typeStation, char *typeConsumer, long int
     Station station={0};
     int h=0;
 
-    if(typeStation==NULL){
+    if(typeStation==NULL || typeConsumer==NULL){
+        printf("Error : process of a NULL station !\n");
         exit(31);
     }
 

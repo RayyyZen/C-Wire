@@ -3,6 +3,12 @@
 #include "file.h"
 
 int main(int argc, char** argv){
+    
+    if(argc!=4){
+        printf("Non valid number of arguments given by the shell scirpt to the c program !\n");
+        exit(150);
+    }
+    
     pTree root=NULL;
     long int infos[INFOS]={0};
     char line[50];
@@ -10,6 +16,7 @@ int main(int argc, char** argv){
     FILE *file=fopen(argv[1],"r");
     
     if(file==NULL){
+        printf("input file couldn't be opened !\n");
         exit(20);
     }
 
@@ -29,6 +36,7 @@ int main(int argc, char** argv){
     FILE *output=fopen(fileName,"w");
 
     if(output==NULL){
+        printf("Output file couldn't be opened !\n");
         exit(21);
     }
     

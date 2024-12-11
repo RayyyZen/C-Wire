@@ -133,7 +133,8 @@ else
         #It removes the first line with the tail command, then the awk command keeps only the lines containing the LVs not connected to companies and finally it sorts by the column containing the individuals
 
     else
-        tail -n+2 "../$1" | awk '{ if($4 != "-") print $0; }' FS=";" | sort -k5 -t';' -n | sort -k6 -s -t';' -n > lvAll.csv
+        #tail -n+2 "../$1" | awk '{ if($4 != "-") print $0; }' FS=";" | sort -k5 -t';' -n | sort -k6 -s -t';' -n > lvAll.csv
+        tail -n+2 "../$1" | awk -F';' '$4 != "-" { print $0 }' | sort -t';' -k6,6n -k5,5n > lvAll.csv
         #It removes the first line with the tail command, then the awk command keeps only the lines containing the LVs and finally it sorts by the column containing the companies then by the column containing the individuals by keeping the stability
     fi
 
@@ -161,7 +162,6 @@ else
     fi
 fi
 
-
 cd ../codeC
 #Opens the codeC folder to compile and execute the C program
 
@@ -181,17 +181,25 @@ mv sortTmp.csv "$2_$3.csv"
 
 if [ "$2" = "lv" ] && [ "$3" = "all" ]
 then
-    tail -n+2 lv_all.csv | awk -F':' -v OFS=':' '{ val = ($2 > $3) ? ($2 - $3) : ($3 - $2); $NF=$NF ":" val; print }' > sortTmpLvAll.csv
+    tail -n+2 lv_all.csv | awk -F':' -v OFS=':' '{ val = ($2 > $3) ? ($2 - $3) : ($3 - $2); $NF=$NF ":" val; print }' > ../tmp/sortTmpLvAll.csv
     #It removes the first line with the tail command, then the awk command adds a new column containing the absolute value of the subtraction between the capacity and the consumption
 
     head -n1 lv_all.csv | awk -F':' -v OFS=':' '{ $NF=$NF ":" "Production balance"; print }' > lv_all_minmax.csv
     #Adds the title of the new column
 
-    sort sortTmpLvAll.csv -k4 -r -t':' -n | head -n10 >> lv_all_minmax.csv
-    #Sorts the LVs by the column containing the production balance and keeps the 10 LVs with the higher balance 
+    sort ../tmp/sortTmpLvAll.csv -k4 -r -t':' -n > ../tmp/sortLvAll.csv
+    #Sorts the LVs by the column containing the production balance
 
-    sort sortTmpLvAll.csv -k4 -r -t':' -n | tail -n10 >> lv_all_minmax.csv
-    #Sorts the LVs by the column containing the production balance and keeps the 10 LVs with the less balance 
+    head -n10 ../tmp/sortLvAll.csv >> lv_all_minmax.csv
+    #Keeps the 10 LVs with the higher balance 
+
+    tail -n10 ../tmp/sortLvAll.csv >> lv_all_minmax.csv
+    #Keeps the 10 LVs with the less balance 
+
+    cd ..
+
+    gnuplot gnu.gnuplot
+
 fi
 
 end=$(date +%s)
