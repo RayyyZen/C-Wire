@@ -106,35 +106,31 @@ fi
 cp $1 input/inputStations.csv
 #It copies the file containing the stations data given as an argument in the input folder
 
-
-cd tmp
-#Opens the tmp folder
-
 if [ "$2" = "hvb" ]
 then
-    tail -n+2 "../$1" | awk '{ if($2 != "-" && $3 == "-") print $0; }' FS=";" | sort -k5 -t';' -n > hvbComp.csv
+    tail -n+2 "$1" | awk '{ if($2 != "-" && $3 == "-") print $0; }' FS=";" | sort -k5 -t';' -n > tmp/hvbComp.csv
     #It removes the first line with the tail command, then the awk command keeps only the lines containing the HVBs and finally it sorts the column containing the companies
 
 elif [ "$2" = "hva" ]
 then
-    tail -n+2 "../$1" | awk '{ if($3 != "-" && $4 == "-") print $0; }' FS=";" | sort -k5 -t';' -n > hvaComp.csv
+    tail -n+2 "$1" | awk '{ if($3 != "-" && $4 == "-") print $0; }' FS=";" | sort -k5 -t';' -n > tmp/hvaComp.csv
     #It removes the first line with the tail command, then the awk command keeps only the lines containing the HVAs and finally it sorts the column containing the companies
 
 else
 
     if [ "$3" = "comp" ]
     then
-        tail -n+2 "../$1" | awk '{ if($4 != "-" && $6 == "-") print $0; }' FS=";" | sort -k5 -t';' -n > lvComp.csv
+        tail -n+2 "$1" | awk '{ if($4 != "-" && $6 == "-") print $0; }' FS=";" | sort -k5 -t';' -n > tmp/lvComp.csv
         #It removes the first line with the tail command, then the awk command keeps only the lines containing the LVs not connected to individuals and finally it sorts by the column containing the companies
 
     elif [ "$3" = "indiv" ]
     then
-        tail -n+2 "../$1" | awk '{ if($4 != "-" && $5 == "-") print $0; }' FS=";" | sort -k6 -t';' -n > lvIndiv.csv
+        tail -n+2 "$1" | awk '{ if($4 != "-" && $5 == "-") print $0; }' FS=";" | sort -k6 -t';' -n > tmp/lvIndiv.csv
         #It removes the first line with the tail command, then the awk command keeps only the lines containing the LVs not connected to companies and finally it sorts by the column containing the individuals
 
     else
         #tail -n+2 "../$1" | awk '{ if($4 != "-") print $0; }' FS=";" | sort -k5 -t';' -n | sort -k6 -s -t';' -n > lvAll.csv
-        tail -n+2 "../$1" | awk -F';' '$4 != "-" { print $0 }' | sort -t';' -k6,6n -k5,5n > lvAll.csv
+        tail -n+2 "$1" | awk -F';' '$4 != "-" { print $0 }' | sort -t';' -k6,6n -k5,5n > tmp/lvAll.csv
         #It removes the first line with the tail command, then the awk command keeps only the lines containing the LVs and finally it sorts by the column containing the companies then by the column containing the individuals by keeping the stability
     fi
 
@@ -162,7 +158,7 @@ else
     fi
 fi
 
-cd ../codeC
+cd codeC
 #Opens the codeC folder to compile and execute the C program
 
 make
