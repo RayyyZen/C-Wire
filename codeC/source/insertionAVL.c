@@ -1,5 +1,6 @@
 #include "insertionAVL.h"
 
+//Function that inserts a station in a balanced binary search tree respecting the balance of rhe nodes
 pTree insertAVL(pTree root, Station station, int *h){
     if(root==NULL){
         (*h)=1;
@@ -29,6 +30,7 @@ pTree insertAVL(pTree root, Station station, int *h){
     return root;
 }
 
+//Function that adds the consumption to a specified station in the balanced binary search tree
 void addConsumption(pTree root, int identifier, int consumption){
     if(root!=NULL){
         if(root->station.identifier==identifier){

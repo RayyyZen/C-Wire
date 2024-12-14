@@ -1,12 +1,12 @@
 # Input file
-datafile = "tests/lv_all_minmax.csv"
+datafile = sprintf("tmp/%s.csv", ARG)
 
 # Output settings
 set terminal pngcairo size 1000,600 enhanced font 'Arial,12'
-set output "graphs/lv_all_minmax_graph.png"
+set output sprintf("graphs/%s_graph.png", ARG)
 
 # Title and labels
-set title "LV Capacity and Consumption" font ",14"
+set title "The production balance of the posts LV" font ",14"
 set xlabel "LV Identifiers" font ",12"
 set ylabel "kWh" font ",12"
 
@@ -26,5 +26,4 @@ set key outside top center horizontal
 set datafile separator ":"
 
 # Plot the bar chart
-plot datafile using 2:xtic(1) title "Capacity (kWh)" linecolor rgb "blue", \
-     '' using 3 title "Consumption (kWh)" linecolor rgb "red"
+plot datafile using 4:xtic(1) title "Production balance (kWh)" linecolor rgb "blue", \

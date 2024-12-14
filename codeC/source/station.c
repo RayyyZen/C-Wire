@@ -1,5 +1,6 @@
 #include "station.h"
 
+//Function that creates a tree containing a station given as an argument and returns it
 pTree createTree(Station newStation){
     pTree node=malloc(sizeof(Tree));
     if(node==NULL){

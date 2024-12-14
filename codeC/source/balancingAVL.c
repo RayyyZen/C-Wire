@@ -1,21 +1,26 @@
 #include "balancingAVL.h"
 
+//Function that returns the maximum between 2 numbers
 int max2(int number1, int number2){
     return number1>number2 ? number1 : number2;
 }
 
+//Function that returns the maximum between 3 numbers
 int max3(int number1, int number2, int number3){
     return max2(max2(number1,number2),max2(number2,number3));
 }
 
+//Function that returns the minimum between 2 numbers
 int min2(int number1, int number2){
     return number1<number2 ? number1 : number2;
 }
 
+//Function that returns the minimum between 3 numbers
 int min3(int number1, int number2, int number3){
     return min2(min2(number1,number2),min2(number2,number3));
 }
 
+//Function that makes a right rotation of a node in the tree to equilibrate it
 pTree rightRotation(pTree node){
     if(node==NULL || node->left==NULL){
         return node;
@@ -30,6 +35,7 @@ pTree rightRotation(pTree node){
     return pivot;
 }
 
+//Function that makes a left rotation of a node in the tree to equilibrate it
 pTree leftRotation(pTree node){
     if(node==NULL || node->right==NULL){
         return node;
@@ -44,6 +50,7 @@ pTree leftRotation(pTree node){
     return pivot;
 }
 
+//Function that makes a right rotation then a left rotation of a node in the tree to equilibrate it
 pTree doubleLeftRotation(pTree node){
     if(node==NULL){
         return node;
@@ -52,6 +59,7 @@ pTree doubleLeftRotation(pTree node){
     return leftRotation(node);
 }
 
+//Function that makes a left rotation then a right rotation of a node in the tree to equilibrate it
 pTree doubleRightRotation(pTree node){
     if(node==NULL){
         return node;
@@ -60,6 +68,7 @@ pTree doubleRightRotation(pTree node){
     return rightRotation(node);
 }
 
+//Function that equilibrate a node by making one of the 4 rotations according to the balance
 pTree balanceAVL(pTree node){
     if(node==NULL){
         return NULL;

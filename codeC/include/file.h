@@ -15,7 +15,8 @@
 #define LOAD 7
 
 void saveLineInfos(char *line, long int infos[INFOS]);
-pTree processStation(pTree root, char *typeStation, char *typeConsumer, long int infos[INFOS]);
+pTree processStation(pTree root, char *typeStation, long int infos[INFOS]);
+long int absoluteValue(long int number1, long int number2);
 void fillOutputFile(FILE *file, pTree root);
 
 #endif

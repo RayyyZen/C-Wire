@@ -1,5 +1,6 @@
 #include "deleteTree.h"
 
+//Function that deletes the under left tree of a tree
 void deleteLeft(pTree root){
     if(root!=NULL && root->left!=NULL){
         if(root->left->left!=NULL){
@@ -13,6 +14,7 @@ void deleteLeft(pTree root){
     }
 }
 
+//Function that deletes the under right tree of a tree
 void deleteRight(pTree root){
     if(root!=NULL && root->right!=NULL){
         if(root->right->left!=NULL){
@@ -26,6 +28,7 @@ void deleteRight(pTree root){
     }
 }
 
+//Function that deletes all the tree
 void deleteAllTree(pTree *root){
     if(root!=NULL){
         deleteLeft(*root);
