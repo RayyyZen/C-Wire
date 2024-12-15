@@ -1,8 +1,9 @@
 
 *.csv
 
-lv_max_graph.png
+*.png
 
-lv_min_graph.png
+!data/*.png
+#To not ignore the .png files in the data folder that are used in the readme
 
 CWire

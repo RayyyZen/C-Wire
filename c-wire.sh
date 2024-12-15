@@ -213,6 +213,27 @@ cd codeC
 make
 #Compiles the C program
 
+if [ $? -ne 0 ]
+then
+    end=$(date +%s)
+    #Stores the end time of the program to calculate the duration of all the process
+    echo "The analysis failed ! (Duration of the process : $((end-debut)) seconds)"
+    echo "Cause : The compilation failed !"
+    display_help
+    exit 19
+fi
+# $? is the return code of the make command (It returns 0 if it was a success)
+
+if [ ! -x "CWire" ]
+then
+    end=$(date +%s)
+    #Stores the end time of the program to calculate the duration of all the process
+    echo "The analysis failed ! (Duration of the process : $((end-debut)) seconds)"
+    echo "Cause : The executable wasn't found !"
+    display_help
+    exit 20
+fi
+
 if [ $# -eq 3 ]
 then
     ./CWire "../tmp/$file" "$2" "$3"
@@ -250,46 +271,34 @@ then
     if [ $numberLines -gt 20 ]
     then
 
-        tail -n+2 "$fileName" | sort -k4 -r -t':' -n > ../tmp/sortLvAll.csv
-        #Sorts the posts LV by the column containing the production balance
+        tail -n+2 "$fileName" | sort -k3 -r -t':' -n > ../tmp/sortLvAll.csv
+        #Sorts the posts LV by the column containing the consumption
+
+        head -n10 ../tmp/sortLvAll.csv > ../tmp/sortLvTmp.csv
+        #Keeps the 10 LVs with the higher consumption
+
+        tail -n10 ../tmp/sortLvAll.csv >> ../tmp/sortLvTmp.csv
+        #Keeps the 10 LVs with the less consumption
 
         if [ $# -eq 3 ]
         then
             fileNameLV="lv_all_minmax.csv"
+            fileNameLVMinMax="lv_all_minmax"
 
         else
             fileNameLV="lv_all_minmax_$4.csv"
-
+            fileNameLVMinMax="lv_all_minmax_$4"
         fi
 
         head -n1 "$fileName" > "$fileNameLV"
-        #Adds the first line of the lv_all.csv file to the new file
 
-        head -n10 ../tmp/sortLvAll.csv >> "$fileNameLV"
-        #Keeps the 10 LVs with the higher balance 
-
-        tail -n10 ../tmp/sortLvAll.csv >> "$fileNameLV"
-        #Keeps the 10 LVs with the less balance 
-
-        if [ $# -eq 3 ]
-        then
-            fileNameLVMin="lv_min"
-            fileNameLVMax="lv_max"
-
-        else
-            fileNameLVMin="lv_min_$4"
-            fileNameLVMax="lv_max_$4"
-
-        fi
-
-        tail -n+12 "$fileNameLV" > "../tmp/$fileNameLVMin.csv"
-        tail -n+2 "$fileNameLV" | head -n10 > "../tmp/$fileNameLVMax.csv"
+        sort -k4 -t':' -n ../tmp/sortLvTmp.csv >> "$fileNameLV"
+        #Sorts the output file by the column containg the production balance
 
         cd ..
-        
-        gnuplot -e "ARG='$fileNameLVMin'" graph.gnuplot
-        gnuplot -e "ARG='$fileNameLVMax'" graph.gnuplot
-        #Creates two bar graphs with the minmax file by using a gnuplot script, the graphs contains the 10 posts LV with the higher/lower production balance in kwh
+
+        gnuplot -e "ARG='$fileNameLVMinMax'" graph.gnuplot
+        #Creates a bar graph with the minmax file by using a gnuplot script
     
     else
         echo ""

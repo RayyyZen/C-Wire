@@ -36,7 +36,7 @@ Example of an output file (after the command `lv all`) :
 
 163167:115326:312225:196899 defines the post LV with the identifier 163167 and a capacity of 115326 kWh and the sum of the load of the consumers directly connected to this post lv is 312225 kWh and its production balance is 196899 kWh.
 
-If the user executes the command `lv all`, adding to the regular output file, another `.csv` file is created containing the 10 posts LV with the higher production balance and the 10 posts LV with the lower production balance. It also generates 2 bar graphs with a gnuplot script containing the production balance in kWh of each of these 20 posts LV.
+If the user executes the command `lv all`, adding to the regular output file, another `.csv` file is created containing the 10 posts LV with the higher consumption and the 10 posts LV with the lower consumption. It also generates a bar graph with a gnuplot script containing the production balance in kWh of each of these 20 posts LV.
 
 Example of a minmax output file (after the command `lv all`) : 
 
