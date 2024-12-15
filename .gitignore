@@ -1,6 +1,8 @@
 
 *.csv
 
-*.png
+lv_max_graph.png
+
+lv_min_graph.png
 
 CWire
