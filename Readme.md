@@ -66,7 +66,7 @@ git clone https://github.com/RayyyZen/C-Wire.git
 
 3. **Move into the project folder :** 
 ```sh
-cd CWire
+cd C-Wire
 ```
 
 4. **Execute the project :**
