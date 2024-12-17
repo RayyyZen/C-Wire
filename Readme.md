@@ -61,7 +61,7 @@ sudo apt update && sudo apt install gnuplot
 
 2. **Clone the repository :** 
 ```sh
-git clone https://github.com/RayyyZen/CWire.git
+git clone https://github.com/RayyyZen/C-Wire.git
 ```
 
 3. **Move into the project folder :** 
