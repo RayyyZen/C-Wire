@@ -2,7 +2,7 @@
 
 ## Introduction
 
-**C-Wire** is a project built in C and Shell for our second year of preparatory engineering studies. This project's goal is to make a data synthesis of an electricity ditribution system by analyzing the consumption of the companies or the individuals in terms of electricity coming from each type of station (Power plants, HVB stations, HVA stations, LV posts). The part of processing the `.csv` input file to keep only the useful informations is done with the Shell script, and the part of the summation of the load of the consumers directly connected to a station is done with the C program using a balanced binary search tree to optimize the process duration.
+**C-Wire** is a project built in C and Shell for our second year of preparatory engineering studies. This project's goal is to make a data synthesis of an electricity ditribution system by analyzing the consumption of the companies or the individuals in terms of energy coming from each type of station (Power plants, HVB stations, HVA stations, LV posts). The part of processing the `.csv` input file to keep only the useful informations is done with the Shell script, and the part of the summation of the load of the consumers directly connected to a station is done with the C program using a balanced binary search tree to optimize the process duration.
 
 ### Input file
 

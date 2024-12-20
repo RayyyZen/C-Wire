@@ -3,7 +3,7 @@
 #Function that displays the help containing the instructions to execute the program
 display_help(){
     echo ""
-    echo "This project's goal is to make a data synthesis of an electricity ditribution system by analyzing the consumption of the companies or the individuals in terms of electricity coming from each type of station (Power plants, HVB stations, HVA stations, LV posts)"
+    echo "This project's goal is to make a data synthesis of an electricity ditribution system by analyzing the consumption of the companies or the individuals in terms of energy coming from each type of station (Power plants, HVB stations, HVA stations, LV posts)"
     echo "To execute the program you must add :"
     echo "1. The execution command of the Shell script : bash c-wire.sh"
     echo "2. The path to the file containing the stations data"
