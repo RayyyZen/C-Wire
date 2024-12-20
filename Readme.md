@@ -2,7 +2,7 @@
 
 ## Introduction
 
-**C-Wire** is a project built in C and Shell for our second year of preparatory engineering studies. This project's goal is to make a data synthesis of an electricity ditribution system by analyzing the consumption of the companies or the individuals in terms of energy coming from each type of station (Power plants, HVB stations, HVA stations, LV posts). The part of processing the `.csv` input file to keep only the useful informations is done with the Shell script, and the part of the summation of the load of the consumers directly connected to a station is done with the C program using a balanced binary search tree to optimize the process duration.
+**C-Wire** is a project built in C and Shell for our second year of preparatory engineering studies. This project's goal is to make a data synthesis of an electricity ditribution system by analyzing the consumption of the companies or the individuals in terms of electricity coming from each type of station (Power plants, HVB stations, HVA stations, LV posts). The part of processing the `.csv` input file to keep only the useful informations is done with the Shell script, and the part of the summation of the load of the consumers directly connected to a station is done with the C program using a balanced binary search tree to optimize the process duration.
 
 ### Input file
 
@@ -34,9 +34,9 @@ Example of an output file (after the command `lv all`) :
 
 ![outputFile](data/outputFile.png)
 
-163167:115326:312225:196899 defines the post LV with the identifier 163167 and a capacity of 115326 kWh and the sum of the load of the consumers directly connected to this post lv is 312225 kWh and its production balance is 196899 kWh.
+163167:115326:312225:196899 defines the post LV with the identifier 163167 and a capacity of 115326 kWh and the sum of the load of the consumers directly connected to this lv post is 312225 kWh and its production balance is 196899 kWh.
 
-If the user executes the command `lv all`, adding to the regular output file, another `.csv` file is created containing the 10 posts LV with the higher consumption and the 10 posts LV with the lower consumption. It also generates a bar graph with a gnuplot script containing the production balance in kWh of each of these 20 posts LV.
+If the user executes the command `lv all`, adding to the regular output file, another `.csv` file is created containing the 10 LV posts with the higher consumption and the 10 LV posts with the lower consumption, sorted by the column containing the production balance. It also generates a bar graph with a gnuplot script containing the production balance in kWh of each of these 20 posts LV.
 
 Example of a minmax output file (after the command `lv all`) : 
 
@@ -71,7 +71,7 @@ cd C-Wire
 
 4. **Execute the project :**
 
-To execute the project the user must execute the command bash c-wire.sh followed by the path of the `.csv` file then the type of station to process (hvb or hva or lv) after that the type of consumer to process (comp or indiv or all) and finally a specified power plant identifier to process (optional).
+To execute the project the user must execute the command `bash c-wire.sh` followed by the path of the `.csv` file then the type of station to process (hvb or hva or lv) after that the type of consumer to process (comp or indiv or all) and finally a specified power plant identifier to process (optional).
 
 Example :
 ```sh

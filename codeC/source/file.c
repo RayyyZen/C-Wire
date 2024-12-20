@@ -38,35 +38,15 @@ void saveLineInfos(char *line, long int infos[INFOS]){
     }
 }
 
-//Function that processes an array by either adding a new node to the tree or adding a consumption to a node according to the infos
-pTree processStation(pTree root, char *typeStation, long int infos[INFOS]){
+//Function that processes an array adding a new node to the tree or adding a consumption to a node according to the infos
+pTree processStation(pTree root, long int infos[INFOS]){
     Station station={0};
-    int h=0,STATION=-1;
+    int h=0;
 
-    if(typeStation==NULL){
-        printf("Error : process of a NULL station !\n");
-        exit(31);
-    }
-
-    if(strcmp(typeStation,"hvb")==0){
-        STATION=HVB;
-    }
-    else if(strcmp(typeStation,"hva")==0){
-        STATION=HVA;
-    }
-    else{
-        STATION=LV;
-    }
-
-    if(infos[COMPANY]==0 && infos[INDIVIDUAL]==0){
-        station.identifier=infos[STATION];
-        station.capacity=infos[CAPACITY];
-        station.consumption=0;
-        root=insertAVL(root,station,&h);
-    }
-    else{
-        addConsumption(root,infos[STATION],infos[LOAD]);
-    }
+    station.identifier=infos[IDENTIFIER];
+    station.capacity=infos[CAPACITY];
+    station.consumption=infos[LOAD];
+    root=insertAVL(root,station,&h);
 
     return root;
 }

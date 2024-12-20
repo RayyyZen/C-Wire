@@ -68,7 +68,7 @@ pTree doubleRightRotation(pTree node){
     return rightRotation(node);
 }
 
-//Function that equilibrate a node by making one of the 4 rotations according to the balance
+//Function that equilibrates a node by making one of the 4 rotations according to the balance
 pTree balanceAVL(pTree node){
     if(node==NULL){
         return NULL;

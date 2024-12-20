@@ -1,9 +1,11 @@
-
 *.csv
+#Ignores all the .csv files
 
 *.png
+#Ignores all the .png files
 
 !data/*.png
-#To not ignore the .png files in the data folder that are used in the readme
+#To not ignore the .png files in the data folder that are used in the Readme
 
 CWire
+#Ignores the executable file

@@ -4,7 +4,7 @@
 int main(int argc, char** argv){
     
     if(argc!=4 && argc!=5){
-        printf("Non valid number of arguments given by the shell scirpt to the c program !\n");
+        printf("Non valid number of arguments given by the shell scirpt to the C program !\n");
         exit(150);
     }
     //If argc is equal to 4 it means that the user has not given a specified power plant to process, but if it is equal to 5 it means that he has given one
@@ -23,7 +23,7 @@ int main(int argc, char** argv){
 
     while(fscanf(file,"%s",line)!=EOF){
         saveLineInfos(line,infos);
-        root=processStation(root,argv[2],infos);
+        root=processStation(root,infos);
     }
 
     fclose(file);
